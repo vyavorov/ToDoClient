@@ -1,0 +1,50 @@
+.taskTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+.deleteBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+.deleteBtn:hover {
+    background-color: #d32f2f;
+  }
+
+  .editBtn {
+    background-color: #ffae00;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+.editBtn:hover {
+    background-color: #b9b300;
+  }

@@ -1,5 +1,6 @@
 import TodoListForm from "./components/TodoListForm"
 import './App.css'
+import TodoListTable from "./components/TodoListTable"
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       </header>
       <main>
         <TodoListForm />
+        <TodoListTable />
       </main>
     </div>
   )
