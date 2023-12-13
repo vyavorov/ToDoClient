@@ -1,4 +1,4 @@
-import TodoList from "./components/TodoList"
+import TodoListForm from "./components/TodoListForm"
 import './App.css'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <p>This is a simple React Todo app built with Vite.</p>
       </header>
       <main>
-        <TodoList />
+        <TodoListForm />
       </main>
     </div>
   )
