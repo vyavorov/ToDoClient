@@ -1,3 +1,4 @@
+import TableListRow from './TableListRow';
 import styles from './TodoListTable.module.css';
 
 export default function TodoListTable() {
@@ -11,14 +12,7 @@ export default function TodoListTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Check car tires</td>
-          <td>No</td>
-          <td>
-            <button class={styles.editBtn}>Edit</button>
-            <button class={styles.deleteBtn}>Remove</button>
-          </td>
-        </tr>
+        <TableListRow />
       </tbody>
     </table>
   );
