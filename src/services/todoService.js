@@ -6,3 +6,19 @@ export const GetAll = async () => {
     }
     return response.json();
 }
+
+export const Create = async (todo) => {
+    const response = await fetch(baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: todo, isCompleted: false }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to add todo');
+      }
+  
+      return response.json();
+}
