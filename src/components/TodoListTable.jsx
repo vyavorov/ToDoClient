@@ -11,8 +11,8 @@ export default function TodoListTable() {
     const fetchData = async () => {
       try {
         const response = await todoService.GetAll();
-        setTodos(response.data);
-        console.log(response); // that logs the array
+        setTodos(response);
+        console.log(todos);
       } catch (error) {
         console.error('Error fetching todos:', error);
         // Handle the error, e.g., display an error message to the user
@@ -33,6 +33,8 @@ export default function TodoListTable() {
     )
   }
 
+
+
   return (
     <table className={styles.taskTable}>
       <thead>
@@ -43,8 +45,8 @@ export default function TodoListTable() {
         </tr>
       </thead>
       <tbody>
-        {/* {todos.map((todo,index) => <TableListRow key={index} todo={todo}/>)} */}
-        {console.log(todos)}{/* that logs undefined?? */}
+        {todos.map((todo,index) => <TableListRow key={index} todo={todo}/>)}
+        {console.log(todos)}
       </tbody>
     </table>
   );
