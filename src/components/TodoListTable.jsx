@@ -9,6 +9,8 @@ export default function TodoListTable() {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newTask, setNewTask] = useState('');
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [currentRowId, setCurrentRowId] = useState();
   useEffect(() => {
     fetchData();
   }, []);
@@ -37,6 +39,28 @@ export default function TodoListTable() {
       }
     }
   }
+  
+  const deleteTask = async () => {
+    try {
+      await todoService.Remove(currentRowId);
+      setIsModalShown(false);
+      setCurrentRowId(0);
+      fetchData();
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const showModal = (id) => {
+    setIsModalShown(true);
+    setCurrentRowId(id);
+  }
+
+  const hideModal = () => {
+    setIsModalShown(false);
+    setCurrentRowId(0);
+  }
 
   if (loading) {
     return (
@@ -48,9 +72,16 @@ export default function TodoListTable() {
 
   return (
     <>
+      {isModalShown &&
+        <div className={styles.modalWrapper}>
+          <p>Are you sure you want to delete this task?</p>
+          <button onClick={hideModal}>Cancel</button>
+          <button onClick={deleteTask}>Yes</button>
+        </div>
+      }
+
       <div className={formStyles.todoList}>
         <h1>Todo List</h1>
-
         <div className={formStyles.todoForm}>
           <input
             type="text"
@@ -71,7 +102,7 @@ export default function TodoListTable() {
           </tr>
         </thead>
         <tbody>
-          {todos.map((todo, index) => <TableListRow key={index} todo={todo} />)}
+          {todos.map((todo) => <TableListRow key={todo.id} todo={todo} showModal={showModal}/>)}
           {console.log(todos)}
         </tbody>
       </table>
