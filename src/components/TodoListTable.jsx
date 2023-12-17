@@ -19,7 +19,6 @@ export default function TodoListTable() {
     try {
       const response = await todoService.GetAll();
       setTodos(response);
-      console.log(todos);
     } catch (error) {
       console.error('Error fetching todos:', error);
       // Handle the error, e.g., display an error message to the user
@@ -33,13 +32,14 @@ export default function TodoListTable() {
       try {
         await todoService.Create(newTask.trim());
         setNewTask('');
-        setTodos((prevTodos) => [...prevTodos, { title: newTask, isCompleted: false }]);
+        // setTodos((prevTodos) => [...prevTodos, { title: newTask, isCompleted: false }]);
+        fetchData();
       } catch (error) {
         console.log(error);
       }
     }
   }
-  
+
   const deleteTask = async () => {
     try {
       await todoService.Remove(currentRowId);
@@ -49,6 +49,16 @@ export default function TodoListTable() {
     }
     catch (error) {
       console.log(error)
+    }
+  }
+
+  const completeTask = async (id) => {
+    try {
+      await todoService.Complete(id);
+      fetchData();
+      // await todoService.Complete(id);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -102,8 +112,14 @@ export default function TodoListTable() {
           </tr>
         </thead>
         <tbody>
-          {todos.map((todo) => <TableListRow key={todo.id} todo={todo} showModal={showModal}/>)}
-          {console.log(todos)}
+          {todos.map((todo) =>
+            <TableListRow
+              key={todo.id}
+              todo={todo}
+              showModal={showModal}
+              completeTask={completeTask}
+            />
+          )}
         </tbody>
       </table>
     </>

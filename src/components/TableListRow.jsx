@@ -10,6 +10,7 @@ export default function TableListRow(props) {
                 <td>
                     <button className={styles.editBtn}>Edit</button>
                     <button className={styles.deleteBtn} onClick={() => props.showModal(props.todo.id)}>Remove</button>
+                    <button className={styles.completeBtn} onClick={() => props.completeTask(props.todo.id)}>Complete</button>
                     {/* <button className={styles.deleteBtn} onClick={() => removeHandler(props.todo.id)}>Remove</button> */}
                 </td>
             </tr>
