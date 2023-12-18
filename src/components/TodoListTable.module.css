@@ -31,6 +31,7 @@ tr:hover {
   padding: 8px;
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 15px;
 }
 
 .deleteBtn:hover {
@@ -44,10 +45,37 @@ tr:hover {
   padding: 8px;
   border-radius: 4px;
   cursor: pointer;
+  margin-right: 15px;
 }
 
 .editBtn:hover {
   background-color: #b9b300;
+}
+
+.completeBtn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.completeBtn:hover {
+  background-color: #45a049;
+}
+
+.notCompletedBtn {
+  background-color: #b4b4b4;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notCompletedBtn:hover {
+  background-color: #7a7a7a;
 }
 
 .modalWrapper {

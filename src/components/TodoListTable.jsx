@@ -62,6 +62,15 @@ export default function TodoListTable() {
     }
   }
 
+  const unCompleteTask = async (id) => {
+    try {
+      await todoService.Uncomplete(id);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const showModal = (id) => {
     setIsModalShown(true);
     setCurrentRowId(id);
@@ -99,7 +108,7 @@ export default function TodoListTable() {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
           />
-          <button onClick={addTask}>Add Task</button>
+          <button onClick={addTask} className={formStyles.addTaskBtn}>Add Task</button>
         </div>
       </div>
 
@@ -118,6 +127,7 @@ export default function TodoListTable() {
               todo={todo}
               showModal={showModal}
               completeTask={completeTask}
+              uncompleteTask={unCompleteTask}
             />
           )}
         </tbody>

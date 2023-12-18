@@ -58,9 +58,20 @@ export const Complete = async (todoId) => {
     console.error("Error completing todo:", error);
     throw new Error("Failed to complete todo");
   }
-
   // await fetch(`${baseUrl}/${todoId}`)
   //     .then(response => response.json())
   //     .then(result => console.log(result))
   //     .catch(error => console.error(error));
+};
+
+export const Uncomplete = async (todoId) => {
+  try {
+    const response = await fetch(`${baseUrl}/${todoId}`);
+    const result = await response.json();
+    result.isCompleted = false;
+    await Edit(todoId, result);
+  } catch (error) {
+    console.error("Error uncompleting todo:", error);
+    throw new Error("Failed to uncomplete todo");
+  }
 };
