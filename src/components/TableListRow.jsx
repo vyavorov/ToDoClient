@@ -34,7 +34,9 @@ export default function TableListRow(props) {
                         ? (<input type="text" value={editedText} onChange={(e) => setEditexText(e.target.value)} />)
                         : (props.todo.title)}
                 </td>
-                <td>{props.todo.isCompleted ? 'Yes' : 'No'}</td>
+                <td className={props.todo.isCompleted
+                    ? styles.completed
+                    : styles.notCompleted}>{props.todo.isCompleted ? 'Yes' : 'No'}</td>
                 <td>
                     {
                         !isEditing
