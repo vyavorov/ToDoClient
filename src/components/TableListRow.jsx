@@ -57,8 +57,8 @@ export default function TableListRow(props) {
                             )
                             : (
                                 <>
-                                    <button onClick={editCancelHandler}>Cancel</button>
-                                    <button onClick={editSaveHandler}>Save</button>
+                                    <button className={styles.editBtns} onClick={editCancelHandler}>Cancel</button>
+                                    <button className={styles.editBtns} onClick={editSaveHandler}>Save</button>
                                 </>
 
                             )

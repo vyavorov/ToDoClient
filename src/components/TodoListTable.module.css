@@ -80,11 +80,11 @@ tr:hover {
 }
 
 .completed {
-  background-color:#98ff9c;
+  background-color: #98ff9c;
 }
 
 .notCompleted {
-  background-color:#ffd885;
+  background-color: #ffd885;
 }
 
 .modalWrapper {
@@ -98,4 +98,18 @@ tr:hover {
   background-color: white;
   filter: none;
   box-shadow: 1px 1px 200px 20px;
+}
+
+.editBtns {
+  background-color: #b4b4b4;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.editBtns:hover {
+  background-color: #7a7a7a;
 }
