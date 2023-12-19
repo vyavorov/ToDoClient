@@ -94,8 +94,8 @@ export default function TodoListTable() {
       {isModalShown &&
         <div className={styles.modalWrapper}>
           <p>Are you sure you want to delete this task?</p>
-          <button onClick={hideModal}>Cancel</button>
-          <button onClick={deleteTask}>Yes</button>
+          <button onClick={hideModal} className={formStyles.modalBtns}>Cancel</button>
+          <button onClick={deleteTask} className={formStyles.modalBtns}>Yes</button>
         </div>
       }
 

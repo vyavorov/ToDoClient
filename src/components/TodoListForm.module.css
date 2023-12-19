@@ -31,6 +31,18 @@ input {
   background-color: #45a049;
 }
 
+.modalBtns {
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin: 6px;
+  cursor: pointer;
+  border: 1px solid grey;
+}
+
+.modalBtns:hover {
+  background-color: darkgrey;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
