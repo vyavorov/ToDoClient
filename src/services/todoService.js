@@ -1,6 +1,14 @@
 const baseUrl = "https://localhost:7264/api/todos";
-export const GetAll = async () => {
-  const response = await fetch(baseUrl);
+export const GetAll = async (page) => {
+  const response = await fetch(`${baseUrl}?page=${page}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch todos");
+  }
+  return response.json();
+};
+
+export const GetTodosCount = async () => {
+  const response = await fetch(`${baseUrl}/count`);
   if (!response.ok) {
     throw new Error("Failed to fetch todos");
   }

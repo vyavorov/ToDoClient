@@ -4,6 +4,7 @@ import styles from './TodoListTable.module.css';
 import formStyles from './TodoListForm.module.css';
 import loaderStyle from './Loader.module.css';
 import * as todoService from '../services/todoService';
+import Pagination from './Pagination';
 
 export default function TodoListTable() {
   const [todos, setTodos] = useState([]);
@@ -11,13 +12,14 @@ export default function TodoListTable() {
   const [newTask, setNewTask] = useState('');
   const [isModalShown, setIsModalShown] = useState(false);
   const [currentRowId, setCurrentRowId] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
-    fetchData();
+    fetchData(1);
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (page) => {
     try {
-      const response = await todoService.GetAll();
+      const response = await todoService.GetAll(page);
       setTodos(response);
     } catch (error) {
       console.error('Error fetching todos:', error);
@@ -33,7 +35,7 @@ export default function TodoListTable() {
         await todoService.Create(newTask.trim());
         setNewTask('');
         // setTodos((prevTodos) => [...prevTodos, { title: newTask, isCompleted: false }]);
-        fetchData();
+        fetchData(currentPage);
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +47,7 @@ export default function TodoListTable() {
       await todoService.Remove(currentRowId);
       setIsModalShown(false);
       setCurrentRowId(0);
-      fetchData();
+      fetchData(currentPage);
     }
     catch (error) {
       console.log(error)
@@ -55,7 +57,7 @@ export default function TodoListTable() {
   const completeTask = async (id) => {
     try {
       await todoService.Complete(id);
-      fetchData();
+      fetchData(currentPage);
       // await todoService.Complete(id);
     } catch (error) {
       console.log(error);
@@ -65,7 +67,7 @@ export default function TodoListTable() {
   const unCompleteTask = async (id) => {
     try {
       await todoService.Uncomplete(id);
-      fetchData();
+      fetchData(currentPage);
     } catch (error) {
       console.log(error);
     }
@@ -132,6 +134,8 @@ export default function TodoListTable() {
           )}
         </tbody>
       </table>
+
+      <Pagination fetchData={fetchData} pageState={currentPage} setPageState={setCurrentPage}/>
     </>
   );
 }
