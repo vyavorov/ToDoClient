@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import * as todoService from '../services/todoService';
-export default function Pagination({fetchData, pageState, setPageState}) {
+export default function Pagination({fetchData, pageState, setPageState, todos}) {
   const pageSize = 5;
   const [pagesToShow, setPagesToShow] = useState(1);
   useEffect(() => {
     getTodosCount();
-  }, [])
+  }, [todos])
 
   const getTodosCount = async () => {
     try {

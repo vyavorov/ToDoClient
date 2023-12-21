@@ -34,7 +34,6 @@ export default function TodoListTable() {
       try {
         await todoService.Create(newTask.trim());
         setNewTask('');
-        // setTodos((prevTodos) => [...prevTodos, { title: newTask, isCompleted: false }]);
         fetchData(currentPage);
       } catch (error) {
         console.log(error);
@@ -135,7 +134,7 @@ export default function TodoListTable() {
         </tbody>
       </table>
 
-      <Pagination fetchData={fetchData} pageState={currentPage} setPageState={setCurrentPage}/>
+      <Pagination fetchData={fetchData} pageState={currentPage} setPageState={setCurrentPage} todos={todos} />
     </>
   );
 }
