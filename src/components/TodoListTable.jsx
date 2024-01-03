@@ -13,13 +13,26 @@ export default function TodoListTable() {
   const [isModalShown, setIsModalShown] = useState(false);
   const [currentRowId, setCurrentRowId] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [activePageFromParent, setActivePageFromParent] = useState(1);
   useEffect(() => {
     fetchData(1);
   }, []);
 
   const fetchData = async (page) => {
     try {
-      const response = await todoService.GetAll(page);
+      let response = await todoService.GetAll(page);
+      if (response.length === 0) {
+        if (page === 1) {
+          response = [];
+        }
+        else {
+          response = await todoService.GetAll(page - 1);
+          setActivePageFromParent(page-1);
+        }
+      }
+      else {
+        setActivePageFromParent(page);
+      }
       setTodos(response);
     } catch (error) {
       console.error('Error fetching todos:', error);
@@ -134,7 +147,7 @@ export default function TodoListTable() {
         </tbody>
       </table>
 
-      <Pagination fetchData={fetchData} pageState={currentPage} setPageState={setCurrentPage} todos={todos} />
+      <Pagination activePageFromParent={activePageFromParent} fetchData={fetchData} pageState={currentPage} setPageState={setCurrentPage} todos={todos} />
     </>
   );
 }
