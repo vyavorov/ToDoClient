@@ -1,0 +1,16 @@
+ul {
+  background-color: #4caf5063;
+  text-align: right;
+  padding: 12px;
+}
+
+ul * {
+  display: inline-block;
+  margin-right: 32px;
+  text-decoration: none;
+  color: white;
+}
+
+ul *:hover {
+    text-decoration: underline;
+  }

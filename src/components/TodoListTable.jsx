@@ -5,6 +5,7 @@ import formStyles from './TodoListForm.module.css';
 import loaderStyle from './Loader.module.css';
 import * as todoService from '../services/todoService';
 import Pagination from './Pagination';
+import Nav from './Nav';
 
 export default function TodoListTable() {
   const [todos, setTodos] = useState([]);
@@ -27,7 +28,7 @@ export default function TodoListTable() {
         }
         else {
           response = await todoService.GetAll(page - 1);
-          setActivePageFromParent(page-1);
+          setActivePageFromParent(page - 1);
         }
       }
       else {
@@ -112,7 +113,9 @@ export default function TodoListTable() {
           <button onClick={deleteTask} className={formStyles.modalBtns}>Yes</button>
         </div>
       }
-
+      <nav>
+        <Nav />
+      </nav>
       <div className={formStyles.todoList}>
         <h1>Todo List</h1>
         <div className={formStyles.todoForm}>
