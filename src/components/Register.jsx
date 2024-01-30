@@ -3,15 +3,20 @@ import styles from './Register.module.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Nav from "./Nav";
+import * as authService from "../services/authService";
 
 // import { useContext } from "react";
 // import AuthContext from "../../contexts/authContext";
 
 export default function Register() {
+  const navigate = useNavigate();
+
     const [registerData, setRegisterData] = useState({
         email: '',
         password: '',
     });
+
+    const [error, setError] = useState('');
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -21,12 +26,24 @@ export default function Register() {
             [name]: value,
         }));
     };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const user = {email: registerData.email, password: registerData.password};
+            const result = await authService.register(user);
+            navigate("/login");
+            setError('');
+        }
+        catch (error) {
+            setError(error.message);
+        }
+    }
     return (
         <>
             <Nav />
             <section className={styles.auth}>
-                {/* onSubmit={onSubmit} */}
-                <form >
+                <form onSubmit={onSubmit}>
                     <div className={styles.container}>
                         <div className={styles.brandLogo}></div>
                         <h1>Register</h1>
@@ -50,7 +67,7 @@ export default function Register() {
                             value={registerData.password}
                         />
 
-                        {/* {error && <p className={styles.error}>{error}</p>} */}
+                        {error && <p className={styles.error}>{error}</p>}
 
 
                         <input type="submit"
