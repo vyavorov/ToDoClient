@@ -21,12 +21,17 @@ export default function Login() {
             [name]: value,
         }));
     };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+    }
     return (
         <>
             <Nav />
             <section className={styles.auth}>
-                {/* onSubmit={onSubmit} */}
-                <form >
+                
+                <form onSubmit={onSubmit}>
                     <div className={styles.container}>
                         <div className={styles.brandLogo}></div>
                         <h1>login</h1>

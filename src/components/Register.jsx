@@ -9,7 +9,7 @@ import * as authService from "../services/authService";
 // import AuthContext from "../../contexts/authContext";
 
 export default function Register() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [registerData, setRegisterData] = useState({
         email: '',
@@ -30,13 +30,18 @@ export default function Register() {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const user = {email: registerData.email, password: registerData.password};
-            const result = await authService.register(user);
-            navigate("/login");
-            setError('');
+            const user = { email: registerData.email, password: registerData.password };
+            const response = await authService.register(user);
+            if (response.ok) {
+                navigate("/login");
+                setError('');
+            } else {
+                const data = await response.json();
+                setError(data.message);
+            }
         }
         catch (error) {
-            setError(error.message);
+            setError('An error occurred during registration.');
         }
     }
     return (
