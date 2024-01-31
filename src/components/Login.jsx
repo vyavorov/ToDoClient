@@ -3,15 +3,18 @@ import styles from './Login.module.css';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Nav from "./Nav";
+import * as authService from "../services/authService";
 
 // import { useContext } from "react";
 // import AuthContext from "../../contexts/authContext";
 
 export default function Login() {
+    const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
     });
+    const [error, setError] = useState("");
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -22,8 +25,23 @@ export default function Login() {
         }));
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const user = {email: loginData.email, password: loginData.password};
+            const response = await authService.login(user);
+            if (response.ok) {
+                setError('');
+                const data = await response.json();
+                localStorage.setItem('token', data.token);
+                navigate('/');
+            } else {
+                const data = await response.json();
+                setError(data.message);
+            }
+        } catch (err) {
+            setError(err.message);
+        }
 
     }
     return (
@@ -55,7 +73,7 @@ export default function Login() {
                             value={loginData.password}
                         />
 
-                        {/* {error && <p className={styles.error}>{error}</p>} */}
+                        {error && <p className={styles.error}>{error}</p>}
 
 
                         <input type="submit"
