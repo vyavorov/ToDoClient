@@ -6,6 +6,7 @@ import loaderStyle from './Loader.module.css';
 import * as todoService from '../services/todoService';
 import Pagination from './Pagination';
 import Nav from './Nav';
+import { useAuth } from '../contexts/authContext';
 
 export default function TodoListTable() {
   const [todos, setTodos] = useState([]);
@@ -15,8 +16,14 @@ export default function TodoListTable() {
   const [currentRowId, setCurrentRowId] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [activePageFromParent, setActivePageFromParent] = useState(1);
+  const { setAuthenticated } = useAuth();
+
   useEffect(() => {
     fetchData(1);
+    const token = localStorage.getItem('token');
+    if (token) {
+      setAuthenticated(true);
+    }
   }, []);
 
   const fetchData = async (page) => {
