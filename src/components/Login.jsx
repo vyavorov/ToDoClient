@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import Nav from "./Nav";
 import * as authService from "../services/authService";
+import { useAuth } from "../contexts/authContext";
 
 // import { useContext } from "react";
 // import AuthContext from "../../contexts/authContext";
 
 export default function Login() {
     const navigate = useNavigate();
+    const { setAuthenticated } = useAuth();
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: '',
@@ -34,6 +37,7 @@ export default function Login() {
                 setError('');
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
+                setAuthenticated(true);
                 navigate('/');
             } else {
                 const data = await response.json();

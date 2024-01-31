@@ -3,16 +3,23 @@ import Login from './components/Login';
 import Register from './components/Register'
 import TodoListTable from "./components/TodoListTable"
 import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/authContext';
+import { AuthProvider, useAuth } from './contexts/authContext';
+import GuestGuard from './components/guards/GuestGuard';
+import AuthGuard from './components/guards/AuthGuard';
 
 function App() {
-
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<TodoListTable />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<GuestGuard />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        <Route element={<AuthGuard />}>
+            {/* <Route path="/logout" element={<Logout />} /> */}
+            <Route path="/" element={<TodoListTable />} />
+          </Route>
       </Routes>
     </AuthProvider>
   )
