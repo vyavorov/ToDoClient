@@ -1,3 +1,5 @@
+import { decodeJwt } from "../helpers/jwtHelper";
+
 const baseUrl = "https://localhost:7264/api/todos";
 export const GetAll = async (page) => {
   const response = await fetch(`${baseUrl}?page=${page}`);
@@ -16,24 +18,43 @@ export const GetTodosCount = async () => {
 };
 
 export const Create = async (todo) => {
-  const response = await fetch(baseUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ title: todo, isCompleted: false }),
-  });
+  const token = localStorage.getItem("token");
+  if (token) {
+    const decoded = decodeJwt(token);
+    console.log(decoded);
+    const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+    console.log(userId);
 
-  if (!response.ok) {
-    throw new Error("Failed to add todo");
+    const response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: todo,
+        isCompleted: false,
+        ownerId: userId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add todo");
+    }
+
+    return response.json();
   }
-
-  return response.json();
 };
 
 export const Remove = async (todoId) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("User is not authenticated.");
+  }
   const response = await fetch(`${baseUrl}/${todoId}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   if (!response.ok) {
     throw new Error("Failed to delete todo");

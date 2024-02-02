@@ -12,5 +12,11 @@ ul * {
 }
 
 ul *:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
+
+li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
