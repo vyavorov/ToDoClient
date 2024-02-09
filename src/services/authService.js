@@ -28,3 +28,18 @@ export const login = async (user) => {
     throw new Error(err.message);
   }
 };
+
+export const changePassword = async (user) => {
+  try {
+    const response = await fetch(`${baseUrl}/changePassword`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    return response;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
