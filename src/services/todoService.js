@@ -21,9 +21,7 @@ export const Create = async (todo) => {
   const token = localStorage.getItem("token");
   if (token) {
     const decoded = decodeJwt(token);
-    console.log(decoded);
     const userId = decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
-    console.log(userId);
 
     const response = await fetch(baseUrl, {
       method: "POST",

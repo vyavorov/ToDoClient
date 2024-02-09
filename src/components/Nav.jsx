@@ -16,6 +16,7 @@ export default function Nav() {
                 <>
                     <li><Link to="/">Home</Link></li>
                     <li><button onClick={logoutHandler}>Logout</button></li>
+                    <li><Link to="/profile">Profile</Link></li>
                 </>
             )}
             {!authenticated && (

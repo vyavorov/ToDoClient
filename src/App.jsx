@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/authContext';
 import GuestGuard from './components/guards/GuestGuard';
 import AuthGuard from './components/guards/AuthGuard';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -17,9 +18,10 @@ function App() {
         </Route>
 
         <Route element={<AuthGuard />}>
-            {/* <Route path="/logout" element={<Logout />} /> */}
-            <Route path="/" element={<TodoListTable />} />
-          </Route>
+          {/* <Route path="/logout" element={<Logout />} /> */}
+          <Route path="/" element={<TodoListTable />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
       </Routes>
     </AuthProvider>
   )
