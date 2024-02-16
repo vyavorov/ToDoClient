@@ -113,3 +113,17 @@ tr:hover {
 .editBtns:hover {
   background-color: #7a7a7a;
 }
+.editIcon,
+.deleteIcon,
+.completeIcon,
+.uncompleteIcon {
+  width: 25px;
+}
+
+.todoActions {
+  display: flex;
+  width: calc(100% - 2.6px);
+  padding: 15px 0;
+  justify-content: space-around;
+  height: 55px;
+}
