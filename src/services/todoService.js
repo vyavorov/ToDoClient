@@ -25,7 +25,15 @@ export const GetAll = async (page) => {
 };
 
 export const GetTodosCount = async () => {
-  const response = await fetch(`${baseUrl}/count`);
+  // const response = await fetch(`${baseUrl}/count`);
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${baseUrl}/count`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch todos");
   }
