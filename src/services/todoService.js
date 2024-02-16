@@ -2,7 +2,22 @@ import { decodeJwt } from "../helpers/jwtHelper";
 
 const baseUrl = "https://localhost:7264/api/todos";
 export const GetAll = async (page) => {
-  const response = await fetch(`${baseUrl}?page=${page}`);
+  // const response = await fetch(`${baseUrl}?page=${page}`);
+  // if (!response.ok) {
+  //   throw new Error("Failed to fetch todos");
+  // }
+  // return response.json();
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("User is not authenticated.");
+  }
+  const response = await fetch(`${baseUrl}?page=${page}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   if (!response.ok) {
     throw new Error("Failed to fetch todos");
   }
