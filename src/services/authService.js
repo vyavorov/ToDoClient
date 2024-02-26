@@ -1,4 +1,5 @@
-const baseUrl = "https://localhost:7264";
+// const baseUrl = "https://localhost:7264";
+const baseUrl = "https://morning-savannah-54910.herokuapp.com";
 export const register = async (user) => {
   try {
     const response = await fetch(`${baseUrl}/register`, {
