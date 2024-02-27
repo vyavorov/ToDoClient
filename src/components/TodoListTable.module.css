@@ -175,3 +175,28 @@ tr:hover {
     margin-right: 0;
   }
 }
+
+@media screen and (max-width: 475px) {
+  .deleteBtn,
+  .editBtn {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 368px) {
+  nav li {
+    margin-right: 20px;
+  }
+  nav ul {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 333px) {
+  nav li {
+    margin-right: 10px;
+  }
+  nav ul {
+    text-align: center;
+  }
+}
