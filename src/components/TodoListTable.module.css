@@ -127,3 +127,19 @@ tr:hover {
   justify-content: space-around;
   height: 56px;
 }
+
+@media screen and (max-width: 600px) {
+  .editIcon,
+  .deleteIcon,
+  .completeIcon,
+  .uncompleteIcon {
+    width: 15px;
+  }
+
+  .editBtn,
+  .deleteBtn,
+  .uncompleteBtn,
+  .completeBtn {
+    height: 32px;
+  }
+}
