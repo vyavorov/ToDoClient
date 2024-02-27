@@ -9,7 +9,7 @@ td {
   border: 2px solid #adadad;
   padding: 15px;
   text-align: left;
-  width: 33%;
+  /* width: 33%; */
 }
 
 th {
@@ -113,6 +113,8 @@ tr:hover {
 .editBtns:hover {
   background-color: #7a7a7a;
 }
+
+
 .editIcon,
 .deleteIcon,
 .completeIcon,
@@ -120,15 +122,15 @@ tr:hover {
   width: 25px;
 }
 
-.todoActions {
+/* .todoActions {
   display: flex;
   width: calc(100% - 2.6px);
   padding: 15px 0;
   justify-content: space-around;
   height: 56px;
-}
+} */
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 605px) {
   .editIcon,
   .deleteIcon,
   .completeIcon,
