@@ -53,6 +53,7 @@ export default function TodoListTable() {
   const addTask = async () => {
     if (newTask.trim() !== '') {
       try {
+        setLoading(true)
         await todoService.Create(newTask.trim());
         setNewTask('');
         fetchData(currentPage);
@@ -66,6 +67,7 @@ export default function TodoListTable() {
     try {
       await todoService.Remove(currentRowId);
       setIsModalShown(false);
+      setLoading(true)
       setCurrentRowId(0);
       fetchData(currentPage);
     }
