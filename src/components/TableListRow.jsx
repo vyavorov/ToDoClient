@@ -33,7 +33,7 @@ export default function TableListRow(props) {
     return (
         <>
             <tr>
-                <td>
+                <td className={styles.taskText}>
                     {isEditing
                         ? (<input type="text" value={editedText} onChange={(e) => setEditexText(e.target.value)} />)
                         : (props.todo.title)}

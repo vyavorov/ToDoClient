@@ -52,7 +52,9 @@ export default function Profile() {
 
     return (
         <>
-            <Nav />
+            <nav>
+                <Nav />
+            </nav>
             <div className={styles.profileContainer}>
                 <h2>User Profile</h2>
                 <div className={styles.emailContainer}>

@@ -54,3 +54,9 @@
 .success {
   color: green;
 }
+
+@media screen and (max-width: 450px) {
+  .profileContainer {
+    max-width: 100%;
+  }
+}

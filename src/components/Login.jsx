@@ -31,7 +31,7 @@ export default function Login() {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const user = {email: loginData.email, password: loginData.password};
+            const user = { email: loginData.email, password: loginData.password };
             const response = await authService.login(user);
             if (response.ok) {
                 setError('');
@@ -50,9 +50,11 @@ export default function Login() {
     }
     return (
         <>
-            <Nav />
+            <nav>
+                <Nav />
+            </nav>
             <section className={styles.auth}>
-                
+
                 <form onSubmit={onSubmit}>
                     <div className={styles.container}>
                         <div className={styles.brandLogo}></div>
