@@ -76,6 +76,7 @@ export default function TodoListTable() {
 
   const completeTask = async (id) => {
     try {
+      setLoading(true)
       await todoService.Complete(id);
       fetchData(currentPage);
       // await todoService.Complete(id);
@@ -86,6 +87,7 @@ export default function TodoListTable() {
 
   const unCompleteTask = async (id) => {
     try {
+      setLoading(true)
       await todoService.Uncomplete(id);
       fetchData(currentPage);
     } catch (error) {
@@ -103,14 +105,6 @@ export default function TodoListTable() {
     setCurrentRowId(0);
   }
 
-  if (loading) {
-    return (
-      <div className={loaderStyle.loaderContainer}>
-        <div className={loaderStyle.loader}></div>
-      </div>
-    )
-  }
-
   return (
     <>
       {isModalShown &&
@@ -118,6 +112,11 @@ export default function TodoListTable() {
           <p>Are you sure you want to delete this task?</p>
           <button onClick={hideModal} className={formStyles.modalBtns}>Cancel</button>
           <button onClick={deleteTask} className={formStyles.modalBtns}>Yes</button>
+        </div>
+      }
+      {loading &&
+        <div className={loaderStyle.loaderContainer}>
+          <div className={loaderStyle.loader}></div>
         </div>
       }
       <nav>
