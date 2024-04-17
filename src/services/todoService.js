@@ -1,7 +1,7 @@
 import { decodeJwt } from "../helpers/jwtHelper";
 
-// const baseUrl = "https://localhost:7264/api/todos";
-const baseUrl = "https://morning-savannah-54910-88f77ffc3501.herokuapp.com/api/todos";
+const baseUrl = "https://localhost:7264/api/todos";
+// const baseUrl = "https://morning-savannah-54910-88f77ffc3501.herokuapp.com/api/todos";
 export const GetAll = async (page) => {
   // const response = await fetch(`${baseUrl}?page=${page}`);
   // if (!response.ok) {

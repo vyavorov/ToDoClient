@@ -3,6 +3,9 @@ import Nav from "./Nav";
 import styles from './Profile.module.css';
 import { decodeJwt } from "../helpers/jwtHelper";
 import * as authService from '../services/authService';
+import arrowDown from '../assets/arrowDown.svg';
+import arrowUp from '../assets/arrowUp.svg';
+
 
 export default function Profile() {
     const token = localStorage.getItem('token');
@@ -12,6 +15,9 @@ export default function Profile() {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+
+    const [familyMember, setFamilyMember] = useState('');
+    const [shouldInviteFamilyBeShown, setShouldInviteFamilyBeShown] = useState(false);
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -49,6 +55,10 @@ export default function Profile() {
             setSuccess('');
         }
     };
+
+    const showInviteMember = () => {
+        setShouldInviteFamilyBeShown(!shouldInviteFamilyBeShown);
+    }
 
     return (
         <>
@@ -92,6 +102,24 @@ export default function Profile() {
 
                     {error && <p className={styles.error}>{error}</p>}
                     {success && <p className={styles.success}>{success}</p>}
+
+                    <p>Invite family member
+                        <img src={shouldInviteFamilyBeShown ? arrowUp : arrowDown} className={styles.arrows} onClick={showInviteMember} />
+                    </p>
+                    {shouldInviteFamilyBeShown &&
+                        <div>
+                            <input
+                                type="text"
+                                id="familyMember"
+                                value={familyMember}
+                                onChange={(e) => setFamilyMember(e.target.value)}
+                                placeholder="Email address"
+                            />
+                            <button className={styles.changePasswordBtn}>Send invite</button>
+                        </div>
+                    }
+
+
                     <button type="submit" className={styles.changePasswordBtn}>Change Password</button>
                 </form>
             </div>

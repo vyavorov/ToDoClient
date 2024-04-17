@@ -55,6 +55,11 @@
   color: green;
 }
 
+.arrows {
+  width: 20px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 450px) {
   .profileContainer {
     max-width: 100%;
