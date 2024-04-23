@@ -5,6 +5,7 @@ import { decodeJwt } from "../helpers/jwtHelper";
 import * as authService from '../services/authService';
 import arrowDown from '../assets/arrowDown.svg';
 import arrowUp from '../assets/arrowUp.svg';
+import * as familyService from '../services/familyService';
 
 
 export default function Profile() {
@@ -18,6 +19,7 @@ export default function Profile() {
 
     const [familyMember, setFamilyMember] = useState('');
     const [shouldInviteFamilyBeShown, setShouldInviteFamilyBeShown] = useState(false);
+    const [inviteMessage, setInviteMessage] = useState(false);
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -58,6 +60,18 @@ export default function Profile() {
 
     const showInviteMember = () => {
         setShouldInviteFamilyBeShown(!shouldInviteFamilyBeShown);
+    }
+
+    const inviteMember = () => {
+        try {
+            const familyName = userEmail.split('@')[0];
+            familyService.Create(userEmail, familyName, familyMember);
+            setFamilyMember('');
+            setInviteMessage(true);
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -115,7 +129,8 @@ export default function Profile() {
                                 onChange={(e) => setFamilyMember(e.target.value)}
                                 placeholder="Email address"
                             />
-                            <button className={styles.changePasswordBtn}>Send invite</button>
+                            <button type="button" className={styles.changePasswordBtn} onClick={inviteMember}>Send invite</button>
+                            {inviteMessage && <p className={styles.success}>Invite has been sent successfully!</p>}
                         </div>
                     }
 
