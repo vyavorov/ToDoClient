@@ -20,6 +20,8 @@ export default function Profile() {
     const [familyMember, setFamilyMember] = useState('');
     const [shouldInviteFamilyBeShown, setShouldInviteFamilyBeShown] = useState(false);
     const [inviteMessage, setInviteMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(false);
+    const [familyErrorMessage, setFamilyErrorMessage] = useState('');
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
@@ -62,15 +64,24 @@ export default function Profile() {
         setShouldInviteFamilyBeShown(!shouldInviteFamilyBeShown);
     }
 
-    const inviteMember = () => {
+    const inviteMember = async () => {
         try {
+            console.log("test")
             const familyName = userEmail.split('@')[0];
-            familyService.Create(userEmail, familyName, familyMember);
-            setFamilyMember('');
-            setInviteMessage(true);
+            const response = await familyService.Create(userEmail, familyName, familyMember);
+            if (response.ok) {
+                setFamilyMember('');
+                setInviteMessage(true);
+                setErrorMessage(false);
+                setFamilyErrorMessage('');
+            }
+            else {
+                setErrorMessage(true);
+                setFamilyErrorMessage(response.message);
+            }
         }
         catch (err) {
-            console.log(err);
+            console.log(err.message);
         }
     }
 
@@ -131,6 +142,7 @@ export default function Profile() {
                             />
                             <button type="button" className={styles.changePasswordBtn} onClick={inviteMember}>Send invite</button>
                             {inviteMessage && <p className={styles.success}>Invite has been sent successfully!</p>}
+                            {errorMessage && <p className={styles.error}>{familyErrorMessage}</p>}
                         </div>
                     }
 
